@@ -1,8 +1,22 @@
 ﻿@{
     ViewData["Title"] = "Home Page";
 }
+@section Styles{ 
+    <style>
+        h1 {
+            background-color: lightgray;
+        }
+    </style>
+}
 
 <div class="text-center">
     <h1 class="display-4">Welcome</h1>
     <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
 </div>
+
+@section Scripts{
+    <script>
+        console.log("Hello");
+        $('.display-4').text("Welcome MVC!!");
+    </script>
+}
