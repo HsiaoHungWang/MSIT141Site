@@ -51,9 +51,47 @@
                 ]
             };
 
+            // for (let i = 0, max = emp.employees.length; i < max; i++) {
+            //     console.log(emp.employees[i].name)
+            //     console.log(emp.employees[i].workYears)
+            //     console.log(emp.employees[i].salary)
+            //}
+
+            //ES6
+            //emp.employees.forEach(employee => {
+            //    //解構賦值(Destructuring assignment) 
+            //    const { name, workYears, salary } = employee
+
+            //    console.log(name)
+            //    console.log(workYears)
+            //    console.log(salary)
+            //})
+
+           
+
 
 
         });
+
+        //jQuery
+        $('#buttonClick').click(() => {
+            var emp = {
+                "employees": [
+                    { "name": "Tom", "workYears": 3, "salary": 35000 },
+                    { "name": "Jack", "workYears": 5, "salary": 40000 },
+                    { "name": "Mary", "workYears": 7, "salary": 45000 }
+                ]
+            };
+
+            $.each(emp.employees, (idx,employee) => {
+                //console.log(idx)
+                const { name, workYears, salary } = employee
+
+                console.log(name)
+                console.log(workYears)
+                console.log(salary)
+            })
+        })
        
 
 
