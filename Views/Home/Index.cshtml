@@ -23,9 +23,36 @@
         //按下按鈕 => click
         btn.addEventListener('click', () => {
             //要做甚麼事
-            console.log("Hello");
-            myH.textContent = "Welcome MVC!!";
+            //console.log("Hello");
+            //myH.textContent = "Welcome MVC!!";
             //$('.display-4').text("Welcome MVC!!");
+
+            var emps = [{ "name": "Tom", "workYears": 3, "salary": 35000 },
+            { "name": "Jack", "workYears": 5, "salary": 40000 },
+            { "name": "Mary", "workYears": 7, "salary": 45000 }];
+            //[{},{},{}]
+            //array[index 0,1,2]
+            //const emp = emps[1] //{ "name": "Jack", "workYears": 5, "salary": 40000 }
+            ////object.prop  emp.name => Jack
+            //myH.textContent = emp.salary
+            //讀取JSON格式的資料
+            //for (let i = 0, max = emps.length; i < max; i++) {
+            //    console.log(emps[i].name)
+            //    console.log(emps[i].workYears)
+            //    console.log(emps[i].salary)
+            //}
+
+            //todo 讀取emp中的所有資料
+            var emp = {
+                "employees": [
+                    { "name": "Tom", "workYears": 3, "salary": 35000 },
+                    { "name": "Jack", "workYears": 5, "salary": 40000 },
+                    { "name": "Mary", "workYears": 7, "salary": 45000 }
+                ]
+            };
+
+
+
         });
        
 
