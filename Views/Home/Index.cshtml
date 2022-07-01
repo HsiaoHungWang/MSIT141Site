@@ -8,7 +8,7 @@
         }
     </style>
 }
-
+<button class="btn btn-primary mb-3" type="button" id="buttonClick">Click</button>
 <div class="text-center">
     <h1 class="display-4">Welcome</h1>
     <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
@@ -16,7 +16,24 @@
 
 @section Scripts{
     <script>
-        console.log("Hello");
-        $('.display-4').text("Welcome MVC!!");
+        //找到要控制的對象 getElementById('id')、querySelector('css selectors')
+        const btn = document.querySelector('#buttonClick');
+        const myH = document.querySelector('.display-4');
+        //使用者的甚麼行為發生 => Event 事件
+        //按下按鈕 => click
+        btn.addEventListener('click', () => {
+            //要做甚麼事
+            console.log("Hello");
+            myH.textContent = "Welcome MVC!!";
+            //$('.display-4').text("Welcome MVC!!");
+        });
+       
+
+
+       
+
+
+
+       
     </script>
 }
