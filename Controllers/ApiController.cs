@@ -10,6 +10,8 @@ namespace MSIT141Site.Controllers
     {
         public IActionResult Index(string name,int age=0)
         {
+            System.Threading.Thread.Sleep(5000); //停止5秒鐘
+
             //return Content("Ajax, 你好!!","text/plain", System.Text.Encoding.UTF8);
             if (String.IsNullOrEmpty(name))
             {
