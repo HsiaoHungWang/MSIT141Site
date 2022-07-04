@@ -1,0 +1,57 @@
+﻿
+@{
+    ViewData["Title"] = "Register";
+}
+
+<h1>Register</h1>
+<div class="row">
+    <div class="col-3"></div>
+    <div class="col-6">
+        <form name="userInfo" method="post" enctype="application/x-www-form-urlencoded" action="~/api/index">
+            <div class="form-group">
+                <label for="InputName">姓名</label>
+                <input type="text" class="form-control" id="InputName" name="name">
+            </div>
+            <div class="form-group">
+                <label for="InputEmail">電子郵件</label>
+                <input type="text" class="form-control" id="InputEmail" name="email">
+            </div>
+            <div class="form-group">
+                <label for="InputEmail">年紀</label>
+                <input type="number" class="form-control" id="InputAge" name="age">
+            </div>
+
+            <button type="submit" class="btn btn-primary mt-3">Submit</button>
+        </form>
+        <div class="alert alert-info" id="div1"></div>
+    </div>
+    <div class="col-3"></div>
+</div>
+
+@section Scripts{
+    <script>
+    const btnSubmit = document.querySelector('.btn');
+    const divInfo = document.querySelector('#div1');
+
+    btnSubmit.addEventListener('click', (evt) => {
+        evt.preventDefault(); //停止預設行為 submit link
+        const formData = new FormData(document.userInfo);
+         //step1
+        const xhr = new XMLHttpRequest();
+
+        xhr.addEventListener('load', () => {            
+            //step3
+            const data = xhr.responseText;
+            //顯示資料
+            divInfo.innerHTML = `<h3>${data}</h3>`;
+        })
+
+        //step2     
+        xhr.open('POST', '@Url.Content("~/api/index")');     
+        xhr.send(formData);
+    });
+    </script>
+}
+
+
+  
