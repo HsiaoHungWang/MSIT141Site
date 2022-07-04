@@ -13,6 +13,7 @@
         const divInfo = document.querySelector('#div1');
         btnStart.addEventListener('click', () => {
 
+
             //步驟一建立Ajax物件
             const xhr = new XMLHttpRequest();
 
@@ -27,9 +28,8 @@
             })
 
             //步驟二對伺服器端發出要求(Request)
-            xhr.open("GET","/api/index"); //就像是開啟瀏覽器輸入網址
+            xhr.open("GET", "/api/index?name=Mary&age=25"); //就像是開啟瀏覽器輸入網址
             xhr.send(); //按下Enter鍵才會真的去執行
-
 
 
            
@@ -43,6 +43,8 @@
             
 
         })
+
+
 
     </script>
 }
