@@ -9,6 +9,14 @@ namespace MSIT141Site.Controllers
 {
     public class ApiController : Controller
     {
+        
+        private readonly DemoContext _context;
+
+        public ApiController(DemoContext conetxt)
+        {
+            _context = conetxt;
+        }
+
         public IActionResult Index(User user)
         {
            //System.Threading.Thread.Sleep(5000); //停止5秒鐘

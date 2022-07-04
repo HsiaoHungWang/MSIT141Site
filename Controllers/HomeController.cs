@@ -12,14 +12,18 @@ namespace MSIT141Site.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
+        private readonly DemoContext _context;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ILogger<HomeController> logger, DemoContext conetxt)
         {
+            
             _logger = logger;
+            _context = conetxt;
         }
 
         public IActionResult Index()
         {
+           
             return View();
         }
 
