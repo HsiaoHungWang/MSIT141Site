@@ -7,7 +7,7 @@
 <div class="row">
     <div class="col-3"></div>
     <div class="col-6">
-        <form method="post" enctype="application/x-www-form-urlencoded" action="~/api/index">
+        <form method="post" enctype="application/x-www-form-urlencoded">
             <div class="form-group">
                 <label for="InputName">姓名</label>
                 <input type="text" class="form-control" id="InputName" name="name">
@@ -27,3 +27,40 @@
     </div>
     <div class="col-3"></div>
 </div>
+
+@section Scripts{ 
+<script>
+    const btnSubmit = document.querySelector('.btn');
+    const txtName = document.querySelector('#InputName');
+    const txtEmail = document.querySelector('#InputEmail');
+    const txtAge = document.querySelector('#InputAge');
+    const divInfo = document.querySelector('#div1');
+
+    btnSubmit.addEventListener('click', (evt) => {
+        evt.preventDefault(); //停止預設行為 submit link
+
+        //step1
+        const xhr = new XMLHttpRequest();
+
+        xhr.addEventListener('load', () => {
+            console.log('load')
+            //step3
+            const data = xhr.responseText;
+
+            //顯示資料
+            divInfo.innerHTML = `<h3>${data}</h3>`;
+        })
+
+        //step2
+        const params = `name=${txtName.value}&email=${txtEmail.value}&age=${txtAge.value}`;
+        xhr.open('POST', '@Url.Content("~/api/index")');
+        xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+        xhr.send(params);
+
+
+
+
+    })
+</script>
+
+}
