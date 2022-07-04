@@ -11,6 +11,9 @@
 
 @section Scripts{
     <script>
+        //console.log("@Url.Action("abc","api")")
+        //console.log("@Url.Content("~/api/index?name=eric")")
+
         const btnStart = document.querySelector('#buttonStart');
         const divInfo = document.querySelector('#div1');
         const txtName = document.querySelector('#inputName');
@@ -34,7 +37,12 @@
 
             //步驟二對伺服器端發出要求(Request)
            // xhr.open("GET", "/api/index?name=Mary&age=25"); //就像是開啟瀏覽器輸入網址
-            xhr.open("GET", `/api/index?name=${txtName.value}&age=${txtAge.value}`);
+
+            const url = "@Url.Content("~/api/index")"; // /api/index
+            const params = `?name=${txtName.value}&age=${txtAge.value}`;
+
+           // xhr.open("GET", `/api/index?name=${txtName.value}&age=${txtAge.value}`);
+            xhr.open("GET", url + params);
             xhr.send(); //按下Enter鍵才會真的去執行
 
 
