@@ -4,13 +4,18 @@
 }
 
 <h1>FirstAjax</h1>
+<input type="text" class="form-control" id="inputName" placeholder="請輸入姓名" />
+<input type="number" class="form-control" id="inputAge" placeholder="請輸入年紀" />
 <button type="button" class="btn btn-primary mb-3" id="buttonStart">Ajax Start</button>
 <div id="div1" class="alert alert-secondary"></div>
 
-@section Scripts{ 
+@section Scripts{
     <script>
         const btnStart = document.querySelector('#buttonStart');
         const divInfo = document.querySelector('#div1');
+        const txtName = document.querySelector('#inputName');
+        const txtAge = document.querySelector('#inputAge');
+
         btnStart.addEventListener('click', () => {
 
 
@@ -28,19 +33,20 @@
             })
 
             //步驟二對伺服器端發出要求(Request)
-            xhr.open("GET", "/api/index?name=Mary&age=25"); //就像是開啟瀏覽器輸入網址
+           // xhr.open("GET", "/api/index?name=Mary&age=25"); //就像是開啟瀏覽器輸入網址
+            xhr.open("GET", `/api/index?name=${txtName.value}&age=${txtAge.value}`);
             xhr.send(); //按下Enter鍵才會真的去執行
 
 
-           
-            
-
-           
-           
 
 
-            
-            
+
+
+
+
+
+
+
 
         })
 
