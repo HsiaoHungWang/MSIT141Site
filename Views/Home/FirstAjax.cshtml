@@ -1,0 +1,48 @@
+﻿
+@{
+    ViewData["Title"] = "FirstAjax";
+}
+
+<h1>FirstAjax</h1>
+<button type="button" class="btn btn-primary mb-3" id="buttonStart">Ajax Start</button>
+<div id="div1" class="alert alert-secondary"></div>
+
+@section Scripts{ 
+    <script>
+        const btnStart = document.querySelector('#buttonStart');
+        const divInfo = document.querySelector('#div1');
+        btnStart.addEventListener('click', () => {
+
+            //步驟一建立Ajax物件
+            const xhr = new XMLHttpRequest();
+
+            //步驟三在load事件中接收資料
+            //當伺服器回傳結果完成後就會觸發load事件
+            xhr.addEventListener('load', () => {
+                //資料接收
+                const data = xhr.responseText;
+
+                //顯示資料
+                divInfo.innerHTML = `<h2>${data}</h2>`;
+            })
+
+            //步驟二對伺服器端發出要求(Request)
+            xhr.open("GET","/api/index"); //就像是開啟瀏覽器輸入網址
+            xhr.send(); //按下Enter鍵才會真的去執行
+
+
+
+           
+            
+
+           
+           
+
+
+            
+            
+
+        })
+
+    </script>
+}
