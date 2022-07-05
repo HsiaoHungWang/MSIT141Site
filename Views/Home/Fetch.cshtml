@@ -1,0 +1,26 @@
+﻿
+@{
+    ViewData["Title"] = "Fetch";
+}
+
+<h1>Fetch</h1>
+
+@section Scripts{ 
+    <script>
+   // console.log(fetch('@Url.Content("~/api/index")'));  //回傳的是Promise物件
+        fetch('@Url.Content("~/api/index")')
+            .then(response => {
+                //console.log(response);
+                //console.log(response.ok);  //true
+                //console.log(response.status);
+                //console.log(response.headers.get('date'));
+                //console.log(response.headers.get('content-type'));
+                //console.log(response.body);
+                //console.log(response.text()); //得到又是另外一個promise物件
+                return response.text();  //純文字  response.json();
+            })
+            .then(data => {
+                console.log(data)
+            })
+    </script>
+}
