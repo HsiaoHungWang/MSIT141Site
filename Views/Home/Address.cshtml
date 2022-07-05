@@ -31,37 +31,45 @@
             const opt = new Option(city, city);
             selCity.options.add(opt);
         })
+        const selectedCity = selCity.options[selCity.selectedIndex].value;
+         //==========載入行政區域開始==========
+                  const xhr1 = new XMLHttpRequest();
+            xhr1.addEventListener('load', () => {
+                const datas1 = JSON.parse(xhr1.responseText);
+                datas1.forEach((district) => {
+                    const opt1 = new Option(district, district);
+                    selDistrict.options.add(opt1);
+                })
+                const selectedDistrict = selDistrict.options[selDistrict.selectedIndex].value;
+                //console.log(selectedDistrict)
+                 //==========載入路名開始==========
+                          const xhr2 = new XMLHttpRequest();
+                    xhr2.addEventListener('load', () => {
+                        const datas2 = JSON.parse(xhr2.responseText);
+                        datas2.forEach((district) => {
+                            const opt2 = new Option(district, district);
+                            selRoad.options.add(opt2);
+                        })
+                    })
+                xhr2.open("GET", "@Url.Content("~/api/roads")" + `?district=${selectedDistrict}`);
+                    xhr2.send();
+               //==========載入路名結束==========
+            })
+
+        xhr1.open("GET", "@Url.Content("~/api/districts")" + `?city=${selectedCity}`);
+            xhr1.send();
+   //==========載入行政區域結束==========
     })
     xhr.open("GET","@Url.Content("~/api/city")");
         xhr.send();
 
 
+
+
    //==========載入城市結束==========
 
-   //==========載入行政區域開始==========
-          const xhr1 = new XMLHttpRequest();
-    xhr1.addEventListener('load', () => {
-        const datas1 = JSON.parse(xhr1.responseText);
-        datas1.forEach((district) => {
-            const opt1 = new Option(district, district);
-            selDistrict.options.add(opt1);
-        })
-    })
-    xhr1.open("GET", "@Url.Content("~/api/districts")" + `?city=宜蘭縣`);
-    xhr1.send();
-   //==========載入行政區域結束==========
 
-   //==========載入路名開始==========
-          const xhr2 = new XMLHttpRequest();
-    xhr2.addEventListener('load', () => {
-        const datas2 = JSON.parse(xhr2.responseText);
-        datas2.forEach((district) => {
-            const opt2 = new Option(district, district);
-            selRoad.options.add(opt2);
-        })
-    })
-        xhr2.open("GET", "@Url.Content("~/api/roads")" + `?district=宜蘭縣宜蘭市`);
-    xhr2.send();
-   //==========載入路名結束==========
+
+
     </script>
 }
