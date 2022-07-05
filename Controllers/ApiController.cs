@@ -1,8 +1,10 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using MSIT141Site.Models;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -12,10 +14,13 @@ namespace MSIT141Site.Controllers
     {
         
         private readonly DemoContext _context;
+        private readonly IWebHostEnvironment _host;
 
-        public ApiController(DemoContext conetxt)
+        public ApiController(DemoContext conetxt, IWebHostEnvironment hostEnvironment)
         {
             _context = conetxt;
+            _host = hostEnvironment;
+
         }
 
         public IActionResult Index(User user)
@@ -32,8 +37,16 @@ namespace MSIT141Site.Controllers
 
         public IActionResult Register(Member member, IFormFile file)
         {
-            string info = $"{file.FileName} - {file.ContentType} - {file.Length}";
-            return Content(info, "text/plain", System.Text.Encoding.UTF8);
+            //檔案上傳要有實際路徑
+            //C:\Users\Student\Documents\Ajax\MSIT141Site\wwwroot\uploads
+            //string path = _host.ContentRootPath; //會取得專案資料夾的實際路徑
+            string path =Path.Combine(_host.WebRootPath,"uploads",file.FileName); //會取得專案資料夾下wwwroot的實際路徑
+            using (var fileStream = new FileStream(path, FileMode.Create))
+            {
+                file.CopyTo(fileStream); //儲存檔案到uploads資料夾中
+            }
+                string info = $"{file.FileName} - {file.ContentType} - {file.Length}";
+                return Content(info, "text/plain", System.Text.Encoding.UTF8);
         }
 
         public IActionResult CheckAccount(string name)
