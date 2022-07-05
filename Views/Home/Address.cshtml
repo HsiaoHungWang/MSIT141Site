@@ -1,0 +1,33 @@
+﻿
+@{
+    ViewData["Title"] = "Address";
+}
+
+<h1>Address</h1>
+
+<select id="select1">
+</select>
+
+@section Scripts{ 
+<script>
+    const selCity = document.querySelector('#select1');
+    selCity.addEventListener('change', () => {
+        //讀出使用者選擇的資料
+        console.log(selCity.options[selCity.selectedIndex].value);
+    })
+    const xhr = new XMLHttpRequest();
+    xhr.addEventListener('load', () => {
+        //console.log(xhr.responseText);
+        //console.log(JSON.parse(xhr.responseText)); 將JSON字串轉成JSON物件
+        const datas = JSON.parse(xhr.responseText);
+        datas.forEach((city) => {
+            //將資料放進select標籤中
+            const opt = new Option(city, city);
+            selCity.options.add(opt);
+        })
+    })
+    xhr.open("GET","@Url.Content("~/api/city")");
+    xhr.send();
+
+</script>
+}
