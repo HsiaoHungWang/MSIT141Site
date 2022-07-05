@@ -18,8 +18,12 @@
                 <input type="text" class="form-control" id="InputEmail" name="email">
             </div>
             <div class="form-group">
-                <label for="InputEmail">年紀</label>
+                <label for="InputAge">年紀</label>
                 <input type="number" class="form-control" id="InputAge" name="age">
+            </div>
+            <div class="custom-file  mt-3">
+                <input type="file" class="custom-file-input" id="customFile" name="file">
+                <label class="custom-file-label" for="customFile">選擇檔案</label>
             </div>
 
             <button type="submit" class="btn btn-primary mt-3">Submit</button>
@@ -32,7 +36,21 @@
 @section Scripts{
     <script>
     const btnSubmit = document.querySelector('.btn');
-    const divInfo = document.querySelector('#div1');
+        const divInfo = document.querySelector('#div1');
+
+        const txtName = document.querySelector('#InputName');
+
+        txtName.addEventListener('blur', () => {
+            //GET ?name=Jack
+            if (txtName.value.trim() === "") {
+                //顯示錯誤訊息
+            } else {
+                //Ajax
+                if (data == "True") {
+
+                }
+            }
+        })
 
     btnSubmit.addEventListener('click', (evt) => {
         evt.preventDefault(); //停止預設行為 submit link
@@ -48,7 +66,7 @@
         })
 
         //step2     
-        xhr.open('POST', '@Url.Content("~/api/index")');     
+        xhr.open('POST', '@Url.Content("~/api/Register")');     
         xhr.send(formData);
     });
     </script>
