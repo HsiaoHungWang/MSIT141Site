@@ -45,6 +45,20 @@ namespace MSIT141Site.Controllers
             {
                 file.CopyTo(fileStream); //儲存檔案到uploads資料夾中
             }
+            //寫進資料庫
+            byte[] imgByte = null;
+            using (var memoryStream = new MemoryStream())
+            {
+                file.CopyTo(memoryStream);
+                imgByte = memoryStream.ToArray();
+            }
+            member.FileName = file.FileName;
+            member.FileData = imgByte;
+
+            _context.Members.Add(member);
+            _context.SaveChanges();
+            
+
                 string info = $"{file.FileName} - {file.ContentType} - {file.Length}";
                 return Content(info, "text/plain", System.Text.Encoding.UTF8);
         }
