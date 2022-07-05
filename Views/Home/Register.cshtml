@@ -55,7 +55,20 @@
     btnSubmit.addEventListener('click', (evt) => {
         evt.preventDefault(); //停止預設行為 submit link
         const formData = new FormData(document.userInfo);
-         //step1
+        //透過 fetch() 上傳圖檔
+        fetch('@Url.Content("~/api/register")', {
+            method: 'POST',
+            body: formData
+        })
+            .then(response => response.text())
+            .then(data => divInfo.innerHTML = data);
+
+
+
+
+
+        //透過 XMLHttpRequest 上傳圖檔
+         @*//step1
         const xhr = new XMLHttpRequest();
 
         xhr.addEventListener('load', () => {            
@@ -67,7 +80,7 @@
 
         //step2     
         xhr.open('POST', '@Url.Content("~/api/Register")');     
-        xhr.send(formData);
+        xhr.send(formData);*@
     });
     </script>
 }
