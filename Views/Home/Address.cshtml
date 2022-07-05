@@ -5,17 +5,23 @@
 
 <h1>Address</h1>
 
-<select id="select1">
-</select>
+<select id="select1"></select>
+<select id="select2"></select>
+<select id="select3"></select>
 
-@section Scripts{ 
-<script>
-    const selCity = document.querySelector('#select1');
+@section Scripts{
+    <script>
+        const selCity = document.querySelector('#select1');
+        const selDistrict = document.querySelector('#select2');
+        const selRoad = document.querySelector('#select3');
     selCity.addEventListener('change', () => {
         //讀出使用者選擇的資料
         console.log(selCity.options[selCity.selectedIndex].value);
     })
-    const xhr = new XMLHttpRequest();
+
+
+    //==========載入城市開始==========
+           const xhr = new XMLHttpRequest();
     xhr.addEventListener('load', () => {
         //console.log(xhr.responseText);
         //console.log(JSON.parse(xhr.responseText)); 將JSON字串轉成JSON物件
@@ -27,7 +33,35 @@
         })
     })
     xhr.open("GET","@Url.Content("~/api/city")");
-    xhr.send();
+        xhr.send();
 
-</script>
+
+   //==========載入城市結束==========
+
+   //==========載入行政區域開始==========
+          const xhr1 = new XMLHttpRequest();
+    xhr1.addEventListener('load', () => {
+        const datas1 = JSON.parse(xhr1.responseText);
+        datas1.forEach((district) => {
+            const opt1 = new Option(district, district);
+            selDistrict.options.add(opt1);
+        })
+    })
+    xhr1.open("GET", "@Url.Content("~/api/districts")" + `?city=宜蘭縣`);
+    xhr1.send();
+   //==========載入行政區域結束==========
+
+   //==========載入路名開始==========
+          const xhr2 = new XMLHttpRequest();
+    xhr2.addEventListener('load', () => {
+        const datas2 = JSON.parse(xhr2.responseText);
+        datas2.forEach((district) => {
+            const opt2 = new Option(district, district);
+            selRoad.options.add(opt2);
+        })
+    })
+        xhr2.open("GET", "@Url.Content("~/api/roads")" + `?district=宜蘭縣宜蘭市`);
+    xhr2.send();
+   //==========載入路名結束==========
+    </script>
 }
