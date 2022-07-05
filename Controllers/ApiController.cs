@@ -96,5 +96,10 @@ namespace MSIT141Site.Controllers
             var roads = _context.Addresses.Where(a => a.SiteId == district).Select(a => a.Road);
             return Json(roads);
         }
+
+        public IActionResult Members()
+        {
+            return Json(_context.Members);
+        }
     }
 }
