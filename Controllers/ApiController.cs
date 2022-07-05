@@ -63,6 +63,13 @@ namespace MSIT141Site.Controllers
                 return Content(info, "text/plain", System.Text.Encoding.UTF8);
         }
 
+        public IActionResult GetImageBytes(int id = 1)
+        {
+            Member member = _context.Members.Find(id);
+            byte[] img = member.FileData;
+            return File(img, "image/jpeg");
+        }
+
         public IActionResult CheckAccount(string name)
         {
             var exists = _context.Members.Any(m => m.Name == name);

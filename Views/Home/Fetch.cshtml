@@ -4,10 +4,10 @@
 }
 
 <h1>Fetch</h1>
-
+<img id="img1" />
 @section Scripts{ 
     <script>
-   // console.log(fetch('@Url.Content("~/api/index")'));  //回傳的是Promise物件
+        @*// console.log(fetch('@Url.Content("~/api/index")'));  //回傳的是Promise物件
         fetch('@Url.Content("~/api/index")')
             .then(response => {
                 //console.log(response);
@@ -21,6 +21,13 @@
             })
             .then(data => {
                 console.log(data)
+            })*@
+
+        fetch('@Url.Content("~/api/GetImageBytes/6")')
+            .then(response => response.blob())
+            .then(datas => {
+                const myImg = document.querySelector('#img1');
+                myImg.src = URL.createObjectURL(datas);
             })
     </script>
 }
