@@ -68,5 +68,26 @@ namespace MSIT141Site.Controllers
             var exists = _context.Members.Any(m => m.Name == name);
             return Content(exists.ToString(),"text/plain");
         }
+
+        //讀取所有城市的資料
+        public IActionResult City()
+        {
+            var cities = _context.Addresses.Select(a => a.City).Distinct();
+            return Json(cities);
+        }
+
+        //根據城市名稱讀出鄉鎮區的資料
+        public IActionResult Districts(string city)
+        {
+            var districts = _context.Addresses.Where(a=>a.City==city).Select(a => a.SiteId).Distinct();
+            return Json(districts);
+        }
+
+        //根據鄉鎮區的資料讀出路名
+        public IActionResult Roads(string district)
+        {
+            var roads = _context.Addresses.Where(a => a.SiteId == district).Select(a => a.Road);
+            return Json(roads);
+        }
     }
 }
