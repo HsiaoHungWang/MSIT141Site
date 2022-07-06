@@ -68,6 +68,12 @@ namespace MSIT141Site.Controllers
             return View();
         }
 
+        public IActionResult Partial()
+        {
+            ViewBag.data = "Hello Partial!!";
+            return PartialView();
+        }
+
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
