@@ -19,13 +19,13 @@
             $.get('@Url.Content("~/api/index")', { "name": "Jack", "age": 25 }, function (data) {
                 $('#divAlert').text(data)
             })
-            
+
         })
         $('#buttonPost').click(function () {
             $.post('@Url.Content("~/api/index")', { "name": "Mary", "age": 28 }, function (data) {
                 $('#divAlert').text(data)
              })
-            
+
         })
         $('#buttonJson').click(function () {
             $.getJSON('@Url.Content("~/api/districts")', { "city": "臺北市" }, function (datas) {
@@ -36,8 +36,9 @@
             $('#divAlert').text("JSON")
         })
         $('#buttonLoad').click(function () {
-            $('#divAlert').text("LOAD")
+            $('#divAlert').load('@Url.Content("~/home/partial")')
         })
+        
         $('#buttonAjax').click(function () {
             $('#divAlert').text("AJAX")
         })
