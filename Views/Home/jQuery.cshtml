@@ -39,6 +39,8 @@
                     console.log(item);
                 })
             })
+
+            
             $('#divAlert').text("JSON")
         })
         $('#buttonLoad').click(function () {
@@ -48,7 +50,7 @@
         $('#buttonAjax').click(function () {
             $.ajax({
                 url: '@Url.Content("~/api/districts")',
-                type: 'GET', //POST
+                type: 'GET', //POST、PUT、DELETE
                 data: { "city": "臺北市" },
                 dataType:'json'
             }).done((datas) => {
@@ -58,6 +60,10 @@
             $('#divAlert').text("AJAX")
         })
         $('#buttonCors').click(function () {
+            const api = "https://localhost:44322/api/Shippers";
+            $.getJSON(api, function (datas) {
+                console.log(datas);
+            })
             $('#divAlert').text("CORs")
         })
 
