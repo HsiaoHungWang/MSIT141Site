@@ -71,7 +71,7 @@ namespace MSIT141Site.Controllers
         public IActionResult Partial()
         {
             ViewBag.data = "Hello Partial!!";
-            return PartialView();
+            return PartialView(_context.Members);
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

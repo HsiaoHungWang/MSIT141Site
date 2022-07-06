@@ -4,17 +4,23 @@
 }
 
 <h1>jQuery</h1>
-<button id="buttonGet" class="btn btn-primary">get</button>
-<button id="buttonPost" class="btn btn-secondary">post</button>
-<button id="buttonJson" class="btn btn-success">getJson</button>
-<button id="buttonLoad" class="btn btn-info">load</button>
-<button id="buttonAjax" class="btn btn-warning">ajax</button>
-<button id="buttonCors" class="btn btn-danger">cors</button>
-<div class="alert alert-dark mt-3 w-50" role="alert" id="divAlert">
+<div class="row">
+    <div class="col-4" id="divLeft"></div>
+    <div class="col-8">
+        <button id="buttonGet" class="btn btn-primary">get</button>
+        <button id="buttonPost" class="btn btn-secondary">post</button>
+        <button id="buttonJson" class="btn btn-success">getJson</button>
+        <button id="buttonLoad" class="btn btn-info">load</button>
+        <button id="buttonAjax" class="btn btn-warning">ajax</button>
+        <button id="buttonCors" class="btn btn-danger">cors</button>
+        <div class="alert alert-dark mt-3 w-50" role="alert" id="divAlert"></div>
+    </div>
+
 
 </div>
 @section Scripts{
     <script>
+        $('#divLeft').load('@Url.Content("~/home/partial")')
         $('#buttonGet').click(function () {
             $.get('@Url.Content("~/api/index")', { "name": "Jack", "age": 25 }, function (data) {
                 $('#divAlert').text(data)
