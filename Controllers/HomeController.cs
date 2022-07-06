@@ -74,6 +74,11 @@ namespace MSIT141Site.Controllers
             return PartialView(_context.Members);
         }
 
+        public IActionResult ShipperCors()
+        {
+            return View();
+        }
+
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
