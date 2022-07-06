@@ -16,10 +16,16 @@
 @section Scripts{
     <script>
         $('#buttonGet').click(function () {
-            $('#divAlert').text("GET")
+            $.get('@Url.Content("~/api/index")', { "name": "Jack", "age": 25 }, function (data) {
+                $('#divAlert').text(data)
+            })
+            
         })
         $('#buttonPost').click(function () {
-            $('#divAlert').text("POST")
+            $.post('@Url.Content("~/api/index")', { "name": "Mary", "age": 28 }, function (data) {
+                $('#divAlert').text(data)
+             })
+            
         })
         $('#buttonJson').click(function () {
             $('#divAlert').text("JSON")
