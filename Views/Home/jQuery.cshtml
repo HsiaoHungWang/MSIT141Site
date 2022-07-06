@@ -28,6 +28,11 @@
             
         })
         $('#buttonJson').click(function () {
+            $.getJSON('@Url.Content("~/api/districts")', { "city": "臺北市" }, function (datas) {
+                $.each(datas, function (idx, item) {
+                    console.log(item);
+                })
+            })
             $('#divAlert').text("JSON")
         })
         $('#buttonLoad').click(function () {
