@@ -1,0 +1,90 @@
+﻿
+@{
+    ViewData["Title"] = "ShipperCors";
+}
+
+<h1>ShipperCors</h1>
+<button id="buttonAdd" class="btn btn-primary mb-3" data-toggle="modal" data-target="#addModal">
+    <i class="fas fa-plus-square"></i>
+</button>
+<table id="shippers" class="table table-bordered">
+    <thead>
+        <tr>
+            <th>ShipperID</th>
+            <th>CompanyName</th>
+            <th>Phone</th>
+            <th>Delete</th>
+        </tr>
+    </thead>
+    <tbody>
+    <tr><td>1</td><td>Speedy Express</td><td>(503) 555-9831</td><td><button class="btn btn-secondary mr-3" data-toggle="modal" data-target="#addModal"><i class="fas fa-pen-nib"></i></button><button class="btn btn-danger"><i class="fas fa-trash-alt"></i></button></td></tr><tr><td>2</td><td>United Package</td><td>(503) 555-3199</td><td><button class="btn btn-secondary mr-3" data-toggle="modal" data-target="#addModal"><i class="fas fa-pen-nib"></i></button><button class="btn btn-danger"><i class="fas fa-trash-alt"></i></button></td></tr><tr><td>3</td><td>Federal Shipping</td><td>(503) 555-9931</td><td><button class="btn btn-secondary mr-3" data-toggle="modal" data-target="#addModal"><i class="fas fa-pen-nib"></i></button><button class="btn btn-danger"><i class="fas fa-trash-alt"></i></button></td></tr><tr><td>8</td><td>PCHOME</td><td>02-33221122</td><td><button class="btn btn-secondary mr-3" data-toggle="modal" data-target="#addModal"><i class="fas fa-pen-nib"></i></button><button class="btn btn-danger"><i class="fas fa-trash-alt"></i></button></td></tr></tbody>
+</table>
+
+<!-- Modal -->
+<div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Shipper <span></span></h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="addForm">
+                    <input type="hidden" name="ShipperID" id="ShipperID">
+                    <div class="form-group">
+                        <label for="CompanyName">CompanyName</label>
+                        <input type="text" class="form-control" id="CompanyName" name="CompanyName"
+                               placeholder="公司名稱">
+                    </div>
+                    <div class="form-group">
+                        <label for="Phone">Phone</label>
+                        <input type="text" class="form-control" id="Phone" name="Phone" placeholder="電話">
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">關閉</button>
+                <button type="button" class="btn btn-primary" id="buttonSend">送出</button>
+            </div>
+        </div>
+    </div>
+</div>
+@section Scripts{ 
+<script>
+    const url = "https://localhost:44300/api/Shippers"
+    load()
+
+    //讀取資料
+    function load() {
+    }
+
+    $('#buttonSend').click(function () {
+        //隱藏欄位中有shipperID 的資料我們就是要做修改
+       //資料修改
+            
+       //資料新增
+ 
+    })
+
+    //編輯
+    //先將要修改的資料寫到Modal中
+    $('#shippers>tbody').on('click', 'button:nth-child(1)', function () {
+
+    })
+
+    //刪除
+    $('#shippers>tbody').on('click', 'button:nth-child(2)', function () {
+     
+    })
+
+
+    function clearData() {
+        $('input').val("")
+    }
+
+</script>
+
+}

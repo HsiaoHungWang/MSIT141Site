@@ -9,37 +9,32 @@
 <script>
     //setTimeout(function () {
     //    console.log('A');
-    //    setTimeout(function () {
-    //        console.log('B');
-    //        setTimeout(function () {
-    //            console.log('C');
-    //        }, 1000);
-    //    }, 1000);
+    //    
     //}, 1000);
 
     //建立Promise物件
-    //const promise = new Promise((resolve, reject) => {
-    //    //非同步的程式碼
-    //    const num = Math.random() > 0.5 ? 1 : 0;
-    //    console.log(num);
-    //    if (num) {
-    //        resolve("成功")
-    //    } else {
-    //        reject("失敗")
-    //    }
-    //})
+    const promise = new Promise((resolve, reject) => {
+        //非同步的程式碼
+        const num = Math.random() > 0.5 ? 1 : 0;
+        console.log(num);
+        if (num) {
+            resolve("成功")
+        } else {
+            reject("失敗")
+        }
+    })
 
-    ////使用Promise物件
-    //promise
-    //    .then((result) => {
-    //        console.log(result);
-    //    })
-    //    .catch((err) => {
-    //        console.log(err);
-    //    })
-    //    .finally(() => {
-    //        console.log("end");
-    //    })
+    //使用Promise物件
+    promise
+        .then((result) => {
+            console.log(result);
+        })
+        .catch((err) => {
+            console.log(err);
+        })
+        .finally(() => {
+            console.log("end");
+        })
 
     function printSomething(data) {
         const promise = new Promise((resolve, reject) => {

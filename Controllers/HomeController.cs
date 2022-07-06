@@ -58,6 +58,15 @@ namespace MSIT141Site.Controllers
         {
             return View();
         }
+        public IActionResult History()
+        {
+            return View();
+        }
+
+        public IActionResult jQuery()
+        {
+            return View();
+        }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()

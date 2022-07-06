@@ -1,0 +1,153 @@
+﻿
+@{
+    ViewData["Title"] = "ShipperCors";
+}
+
+<h1>ShipperCors</h1>
+<button id="buttonAdd" class="btn btn-primary mb-3" data-toggle="modal" data-target="#addModal">
+    <i class="fas fa-plus-square"></i>
+</button>
+<table id="shippers" class="table table-bordered">
+    <thead>
+        <tr>
+            <th>ShipperID</th>
+            <th>CompanyName</th>
+            <th>Phone</th>
+            <th>Delete</th>
+        </tr>
+    </thead>
+    <tbody></tbody>
+</table>
+
+<!-- Modal -->
+<div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Shipper <span></span></h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="addForm">
+                    <input type="hidden" name="ShipperID" id="ShipperID">
+                    <div class="form-group">
+                        <label for="CompanyName">CompanyName</label>
+                        <input type="text" class="form-control" id="CompanyName" name="CompanyName"
+                               placeholder="公司名稱">
+                    </div>
+                    <div class="form-group">
+                        <label for="Phone">Phone</label>
+                        <input type="text" class="form-control" id="Phone" name="Phone" placeholder="電話">
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">關閉</button>
+                <button type="button" class="btn btn-primary" id="buttonSend">送出</button>
+            </div>
+        </div>
+    </div>
+</div>
+@section Scripts{ 
+<script>
+    const url = "https://localhost:44311/api/Shippers"
+    load()
+
+    //讀取資料
+    function load() {
+        const tbShipper = $('#shippers>tbody')
+        $.getJSON(url, function (datas) {
+            const docFrag = $(document.createDocumentFragment())
+            $.each(datas, function (index, shipper) {
+                const cell1 = $('<td></td>').text(shipper.shipperId);
+                const cell2 = $('<td></td>').text(shipper.companyName);
+                const cell3 = $('<td></td>').text(shipper.phone);
+                const cell4 = $('<td></td>').html('<button class="btn btn-secondary mr-3" data-toggle="modal" data-target="#addModal"><i class="fas fa-pen-nib"></i></button><button class="btn btn-danger"><i class="fas fa-trash-alt"></i></button>')
+
+                const row = $('<tr></tr>').append([cell1, cell2, cell3, cell4])
+                docFrag.append(row)
+            })
+            tbShipper.html(docFrag)
+        })
+    }
+
+    $('#buttonSend').click(function () {
+        //隱藏欄位中有shipperID 的資料我們就是要做修改
+        const id = $('#ShipperID').val()
+        if (id) {
+            //資料修改
+            const jsonData = JSON.stringify({ShipperID:id, CompanyName: $('#CompanyName').val(), Phone: $('#Phone').val() })
+            // console.log(jsonData)
+            $.ajax({
+                url: url + "/" + id,
+                type: 'PUT',
+                contentType: 'application/json',
+                data: jsonData
+            }).done(function (data) {
+                alert("修改成功，編號為 " + id)
+                load()
+                clearData()
+            })
+
+        } else {
+            //資料新增
+            const jsonData = JSON.stringify({ CompanyName: $('#CompanyName').val(), Phone: $('#Phone').val() })
+            // console.log(jsonData)
+            $.ajax({
+                url: url,
+                type: 'POST',
+                contentType: 'application/json',
+                data: jsonData
+            }).done(function (data) {
+                alert("新增成功，編號為 " + data.shipperId)
+                load()
+                clearData()
+            })
+
+        }
+
+
+      
+        $('#addModal').modal('hide')
+    })
+
+    //編輯
+    //先將要修改的資料寫到Modal中
+    $('#shippers>tbody').on('click', 'button:nth-child(1)', function () {
+       // alert('編輯')
+        const shipperId = $(this).parents('tr').find('td:nth-child(1)').text()
+        const companyName = $(this).parents('tr').find('td:nth-child(2)').text()
+        const phone = $(this).parents('tr').find('td:nth-child(3)').text()
+
+        $('#ShipperID').val(shipperId)
+        $('#CompanyName').val(companyName)
+        $('#Phone').val(phone)
+
+
+    })
+
+    //刪除
+    $('#shippers>tbody').on('click', 'button:nth-child(2)', function () {
+        //https://localhost:44311/api/Shippers/7
+        const id = $(this).parents('tr').find('td:first-child').text()
+
+        $.ajax({
+            url: url + "/" +  id,
+            type:'DELETE'
+        }).done(function (data) {
+            alert("刪除成功，編號為 " + id)
+            load()
+        })
+    })
+
+
+    function clearData() {
+        $('input').val("")
+    }
+
+</script>
+
+}
