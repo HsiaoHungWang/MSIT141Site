@@ -42,10 +42,19 @@
             $('#divAlert').text("JSON")
         })
         $('#buttonLoad').click(function () {
-            $('#divAlert').load('@Url.Content("~/home/partial")')
+            $('#divAlert').load('@Url.Content("~/home/index")')
         })
         
         $('#buttonAjax').click(function () {
+            $.ajax({
+                url: '@Url.Content("~/api/districts")',
+                type: 'GET', //POST
+                data: { "city": "臺北市" },
+                dataType:'json'
+            }).done((datas) => {
+                console.log(datas);
+            })
+
             $('#divAlert').text("AJAX")
         })
         $('#buttonCors').click(function () {
